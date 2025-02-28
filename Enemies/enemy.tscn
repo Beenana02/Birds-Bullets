@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://cvaangyin8ynx"]
+
+[ext_resource type="Script" path="res://Enemies/enemy.gd" id="1_fuooc"]
+[ext_resource type="Texture2D" uid="uid://cew6tdlcap510" path="res://Enemies/Seagull.png" id="2_dbjwx"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e3h8i"]
+radius = 6.0
+height = 62.0
+
+[node name="Enemy" type="CharacterBody2D"]
+scale = Vector2(2, 2)
+collision_layer = 4
+collision_mask = 14
+script = ExtResource("1_fuooc")
+speed = 150
+shooting = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_e3h8i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_dbjwx")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, -78)
+
+[node name="GunMuzzle" type="Marker2D" parent="."]
+position = Vector2(1, 89)
+
+[node name="Hitbox" type="Area2D" parent="." groups=["Baddies"]]
+collision_layer = 4
+collision_mask = 15
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox"]
+polygon = PackedVector2Array(0, -27, 5, -27, 6, -18, 13, -13, 26, -18, 43, -12, 46, -9, 30, 3, 7, 6, 0, 21, -8, 6, -21, 3, -31, 3, -46, -7, -45, -11, -28, -18, -14, -13, -6, -18, -5, -27)
+
+[node name="DelayShoot" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
+[connection signal="area_shape_entered" from="Hitbox" to="." method="_on_hitbox_area_shape_entered"]
+[connection signal="ready" from="DelayShoot" to="." method="_on_delay_shoot_ready"]
+[connection signal="timeout" from="DelayShoot" to="." method="_on_delay_shoot_timeout"]

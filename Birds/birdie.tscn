@@ -1,0 +1,145 @@
+[gd_scene load_steps=17 format=3 uid="uid://bmgrninqogkp"]
+
+[ext_resource type="Script" path="res://Birds/birdie.gd" id="1_nr5bx"]
+[ext_resource type="Texture2D" uid="uid://cg7r73igfdsgy" path="res://Birds/eagle.png" id="2_auk1l"]
+[ext_resource type="Texture2D" uid="uid://bupmger4ejy4s" path="res://Birds/eagleLeft.png" id="2_b1w1g"]
+[ext_resource type="Texture2D" uid="uid://2a6m55udodq0" path="res://Birds/eagleFlap.png" id="2_hnq5p"]
+[ext_resource type="Texture2D" uid="uid://dvk0yxfsm55lj" path="res://Birds/eagleRight.png" id="3_ht2bs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a0j31"]
+atlas = ExtResource("2_hnq5p")
+region = Rect2(300, 0, 100, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ybv00"]
+atlas = ExtResource("2_hnq5p")
+region = Rect2(400, 0, 100, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5d5do"]
+atlas = ExtResource("2_hnq5p")
+region = Rect2(500, 0, 100, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sledx"]
+atlas = ExtResource("2_hnq5p")
+region = Rect2(600, 0, 100, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ey83w"]
+atlas = ExtResource("2_hnq5p")
+region = Rect2(700, 0, 100, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_usnm6"]
+atlas = ExtResource("2_hnq5p")
+region = Rect2(0, 0, 100, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_chafd"]
+atlas = ExtResource("2_hnq5p")
+region = Rect2(100, 0, 100, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2i0kl"]
+atlas = ExtResource("2_hnq5p")
+region = Rect2(200, 0, 100, 60)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8i7wx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a0j31")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ybv00")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5d5do")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sledx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ey83w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_usnm6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_chafd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2i0kl")
+}],
+"loop": true,
+"name": &"flap",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_b1w1g")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ht2bs")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_auk1l")
+}],
+"loop": true,
+"name": &"straight",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pogmd"]
+radius = 19.0
+height = 98.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8edhv"]
+radius = 54.0
+height = 108.0
+
+[node name="Birdie" type="CharacterBody2D" groups=["Player"]]
+scale = Vector2(0.5, 0.5)
+collision_layer = 2
+collision_mask = 15
+script = ExtResource("1_nr5bx")
+acceleration = 100
+friction = 0.125
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_8i7wx")
+animation = &"left"
+
+[node name="muzzle" type="Marker2D" parent="."]
+position = Vector2(0, -37)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_pogmd")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_8edhv")
+
+[node name="DodgeTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="CanShoot" type="Timer" parent="."]
+wait_time = 0.05
+
+[node name="flap" type="Timer" parent="."]
+wait_time = 2.5
+autostart = true
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="DodgeTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="CanShoot" to="." method="_on_can_shoot_timeout"]
+[connection signal="timeout" from="flap" to="." method="_on_flap_timeout"]
