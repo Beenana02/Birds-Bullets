@@ -10,4 +10,6 @@ func _process(delta: float) -> void:
 		get_tree().change_scene_to_file("res://scene/main_menu.tscn")
 		lives = 3
 		score = 0
+	if score >= bestScore:
+		bestScore = score
 	

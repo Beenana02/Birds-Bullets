@@ -5,11 +5,15 @@ extends CharacterBody2D
 var enteredScreen = false
 var leftScreen = false
 
+var particleExplosion = preload("res://Particles/explosion.tscn")
 var bullet = preload("res://scene/bullet.tscn")
 @export var shooting = false
 
 #health bar
 @export var health = 2
+
+func _ready() -> void:
+	print(str(shooting))
 
 func _process(delta: float) -> void:
 	if health <= 0:
@@ -36,9 +40,11 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		health -=1
 		if health == 0:
 			Global.score += 1	
-	elif area.is_in_group('Player'):
+	if area.is_in_group('Player'):
 		$CollisionShape2D.disabled = true
 		$Hitbox/CollisionShape2D.disabled = true
+	
+	
 
 
 func _on_hitbox_area_exited(area: Area2D) -> void:

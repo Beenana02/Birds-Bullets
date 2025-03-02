@@ -1,9 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://btsu6rsd2qs32"]
+[gd_scene load_steps=4 format=3 uid="uid://btsu6rsd2qs32"]
 
 [ext_resource type="Script" path="res://Particles/particle.gd" id="1_es1ub"]
 
 [sub_resource type="Curve" id="Curve_1mlqo"]
-_data = [Vector2(0.0393258, 1), 0.0, 0.0, 0, 0, Vector2(0.994382, 0.043956), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.595506, 0.351648), 0.0, 0.0, 0, 0, Vector2(0.994382, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_pym1f"]
+min_value = -1.0
+_data = [Vector2(0, -1), 0.0, 2.8, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [node name="Explosion" type="Node2D"]
@@ -11,13 +16,22 @@ script = ExtResource("1_es1ub")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 emitting = false
-amount = 60
+amount = 100
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
-spread = 135.91
+randomness = 0.66
+lifetime_randomness = 0.55
+emission_shape = 2
+emission_sphere_radius = 15.3
+direction = Vector2(0, 0)
+spread = 131.61
 gravity = Vector2(0, 0)
 initial_velocity_min = 50.0
-initial_velocity_max = 100.0
+initial_velocity_max = 281.82
+angular_velocity_max = 2.0
 scale_amount_max = 3.0
 scale_amount_curve = SubResource("Curve_1mlqo")
+hue_variation_min = -0.1
+hue_variation_max = 0.6
+hue_variation_curve = SubResource("Curve_pym1f")

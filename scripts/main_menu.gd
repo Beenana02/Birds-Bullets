@@ -3,6 +3,10 @@ var level1 = preload("res://scene/level1.tscn")
 
 func _ready() -> void:
 	$VBoxContainer/Start.grab_focus()
+func _process(delta: float) -> void:
+	var hiScore = 0
+	hiScore = Global.bestScore
+	$ColorRect/Highscore.text = "Best Score: " + str(hiScore)
 
 func _on_start_pressed() -> void:
 	get_tree().change_scene_to_file("res://scene/level1.tscn")
