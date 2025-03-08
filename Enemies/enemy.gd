@@ -12,6 +12,8 @@ var bullet = preload("res://scene/bullet.tscn")
 #health bar
 @export var health = 2
 
+
+
 func _ready() -> void:
 	print(str(shooting))
 

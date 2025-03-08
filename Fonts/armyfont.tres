@@ -1,0 +1,10 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://b54vk6cyclc3f"]
+
+[ext_resource type="FontFile" uid="uid://c1d5aolmnlatk" path="res://Fonts/PixelArmy.ttf" id="1_ji0vb"]
+
+[resource]
+font = ExtResource("1_ji0vb")
+font_size = 32
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(2, 5)

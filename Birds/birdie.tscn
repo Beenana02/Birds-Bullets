@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://bmgrninqogkp"]
 
-[ext_resource type="Script" path="res://Birds/birdie.gd" id="1_nr5bx"]
+[ext_resource type="Script" uid="uid://cvvigbq8fdh5i" path="res://Birds/birdie.gd" id="1_nr5bx"]
 [ext_resource type="Texture2D" uid="uid://cg7r73igfdsgy" path="res://Birds/eagle.png" id="2_auk1l"]
 [ext_resource type="Texture2D" uid="uid://bupmger4ejy4s" path="res://Birds/eagleLeft.png" id="2_b1w1g"]
 [ext_resource type="Texture2D" uid="uid://2a6m55udodq0" path="res://Birds/eagleFlap.png" id="2_hnq5p"]
@@ -107,14 +107,14 @@ scale = Vector2(0.5, 0.5)
 collision_layer = 2
 collision_mask = 15
 script = ExtResource("1_nr5bx")
-acceleration = 100
-friction = 0.125
+acceleration = 50
+friction = 800.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_8i7wx")
-animation = &"left"
+animation = &"straight"
 
 [node name="muzzle" type="Marker2D" parent="."]
 position = Vector2(0, -37)
@@ -138,6 +138,14 @@ wait_time = 0.05
 [node name="flap" type="Timer" parent="."]
 wait_time = 2.5
 autostart = true
+
+[node name="BirdShadow" type="AnimatedSprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.396078)
+texture_filter = 1
+position = Vector2(0, 110)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_8i7wx")
+animation = &"flap"
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="timeout" from="DodgeTimer" to="." method="_on_timer_timeout"]

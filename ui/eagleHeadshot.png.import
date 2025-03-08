@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2we2nurhi5cw"
-path="res://.godot/imported/Title.png-0fdbe37ca3e9f7d480ff038fa3ba23ab.ctex"
+uid="uid://dfty1w8trenwv"
+path="res://.godot/imported/eagleHeadshot.png-ad8b25c7a27c45f1cae070cadd3c371b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Title.png"
-dest_files=["res://.godot/imported/Title.png-0fdbe37ca3e9f7d480ff038fa3ba23ab.ctex"]
+source_file="res://ui/eagleHeadshot.png"
+dest_files=["res://.godot/imported/eagleHeadshot.png-ad8b25c7a27c45f1cae070cadd3c371b.ctex"]
 
 [params]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=4 uid="uid://nn67qv4e5scd"]
 
-[ext_resource type="Script" path="res://scene/levels.gd" id="1_sogwi"]
+[ext_resource type="Script" uid="uid://k2cr01s31of1" path="res://scripts/levels.gd" id="1_sogwi"]
 [ext_resource type="PackedScene" uid="uid://bmgrninqogkp" path="res://Birds/birdie.tscn" id="1_yxleh"]
 [ext_resource type="PackedScene" uid="uid://de7pkpeimdmvg" path="res://scene/main_menu.tscn" id="2_3krkc"]
 [ext_resource type="PackedScene" uid="uid://cvaangyin8ynx" path="res://Enemies/enemy.tscn" id="2_jae3m"]

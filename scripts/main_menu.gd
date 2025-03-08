@@ -30,3 +30,7 @@ func _on_quit_focus_entered() -> void:
 
 func _on_quit_focus_exited() -> void:
 	$Quit.text = 'Quit Game'
+
+
+func _on_endless_mode_pressed() -> void:
+	get_tree().change_scene_to_file("res://scene/endless_mode.tscn")

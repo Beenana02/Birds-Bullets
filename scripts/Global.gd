@@ -3,6 +3,8 @@ extends Node2D
 var score = 0
 var lives = 3
 var bestScore = 0
+var percentShot = 100
+var ems =0
 
 func _process(delta: float) -> void:
 	if lives == 0:

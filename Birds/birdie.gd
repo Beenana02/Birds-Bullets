@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var friction = 0.2
 var bullet = preload("res://scene/bullet.tscn")
 @onready var aniplayer = $AnimatedSprite2D
+@onready var shadowaniplayer = $BirdShadow
 
 var dodging = false
 var canShoot = true
@@ -28,19 +29,25 @@ func shoot():
 func animations():
 	if Input.is_action_pressed("left"):
 		aniplayer.play('left')
+		shadowaniplayer.play('left')
 		notTurning = false
 	elif Input.is_action_pressed('right'):
 		aniplayer.play("right")
+		shadowaniplayer.play('right')
 		notTurning = false
 	elif Input.is_action_just_pressed("forward"):
 		aniplayer.play("straight")
+		shadowaniplayer.play('straight')
 	elif Input.is_action_just_released("left"):
 		aniplayer.play("straight")
+		shadowaniplayer.play('straight')
 	elif Input.is_action_just_released("right"):
 		aniplayer.play("straight")
+		shadowaniplayer.play('straight')
 			
 func _process(delta: float) -> void:
 	animations()
+	playerMovement(delta)
 	
 	if Global.lives == 0:
 		queue_free()
@@ -48,6 +55,11 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("shoot") and dodging == false and canShoot == true:
 		shoot()
 		
+	
+	
+	if Input.is_action_just_pressed("dodge"):
+		dodge()
+func playerMovement(delta):
 	var playerInput = get_input()
 	var direction := Vector2(
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
@@ -57,12 +69,12 @@ func _process(delta: float) -> void:
 	if input != Vector2.ZERO:
 		velocity = lerp(velocity, playerInput * speed, delta * acceleration)
 	else:
-		velocity = velocity.lerp(Vector2.ZERO, 0.04)
+		if velocity.length() > (friction * delta):
+			velocity -= velocity.normalized() * (friction * delta)
+		else:
+			velocity = Vector2.ZERO
 	move_and_slide()
 	
-	if Input.is_action_just_pressed("dodge"):
-		dodge()
-
 #dodge mechanics 
 func _on_timer_timeout() -> void:
 	if dodging:
@@ -93,3 +105,4 @@ func _on_can_shoot_timeout() -> void:
 
 func _on_flap_timeout() -> void:
 	aniplayer.play("flap")
+	shadowaniplayer.play("flap")

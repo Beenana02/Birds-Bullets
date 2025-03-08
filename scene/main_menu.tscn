@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://de7pkpeimdmvg"]
 
-[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_3ji5i"]
-[ext_resource type="Texture2D" uid="uid://c1sn0aiifhvgd" path="res://BackgroundMain.png" id="2_5xyyo"]
-[ext_resource type="Texture2D" uid="uid://d2we2nurhi5cw" path="res://Title.png" id="3_4b8gk"]
+[ext_resource type="Script" uid="uid://d3g1ncg3dhrc0" path="res://scripts/main_menu.gd" id="1_3ji5i"]
+[ext_resource type="Texture2D" uid="uid://c1sn0aiifhvgd" path="res://ui/BackgroundMain.png" id="2_5xyyo"]
+[ext_resource type="Texture2D" uid="uid://d2we2nurhi5cw" path="res://ui/Title.png" id="3_4b8gk"]
 
 [sub_resource type="Theme" id="Theme_qjgbi"]
 
@@ -53,6 +53,11 @@ text = "LEARN TO PLAY"
 [node name="Settings" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "SETTINGS"
+
+[node name="EndlessMode" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "ENDLESS
+"
 
 [node name="Quit" type="Button" parent="."]
 layout_mode = 1
@@ -106,6 +111,8 @@ text = "Best Score:
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/Intro" to="." method="_on_intro_pressed"]
 [connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="VBoxContainer/EndlessMode" to="." method="_on_endless_mode_pressed"]
+[connection signal="pressed" from="VBoxContainer/EndlessMode" to="." method="_on_settings_pressed"]
 [connection signal="focus_entered" from="Quit" to="." method="_on_quit_focus_entered"]
 [connection signal="focus_exited" from="Quit" to="." method="_on_quit_focus_exited"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
